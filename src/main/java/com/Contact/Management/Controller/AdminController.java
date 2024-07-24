@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/admin")
+
 public class AdminController {
 
     // Ensure this is set correctly
@@ -35,18 +35,18 @@ public class AdminController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/index")
+    @GetMapping("/admin/index")
     public String adminHome() {
         return "Admin/Admin_Home";
     }
 
-    @GetMapping("/categories/add")
+    @GetMapping("/admin/categories/add")
     public String showAddCategoryForm(Model model) {
         model.addAttribute("category", new Category());
         return "/Admin/categoriesadd"; // replace with your form view name
     }
 
-    @PostMapping("/categories/add")
+    @PostMapping("/admin/categories/add")
     public String addCategory(@ModelAttribute("category") Category category) {
         // Save the category using the categoryService
         this.categoryService.addCategory(category);
@@ -54,19 +54,19 @@ public class AdminController {
         return "redirect:/admin/categories";
     }
 
-    @GetMapping("/categories")
+    @GetMapping("/admin/categories")
     public String listCategories(Model model) {
         model.addAttribute("category", categoryService.getAllCategory());
         return "/Admin/categories"; // replace with your list view name
     }
 
-    @RequestMapping("/categories/delete/{id}")
+    @RequestMapping("/admin/categories/delete/{id}")
     public String removeCategory(@PathVariable int id) {
         this.categoryService.RemoveCategoryById(id);
         return "redirect:/admin/categories";
     }
 
-    @GetMapping("/categories/update/{id}")
+    @GetMapping("/admin/categories/update/{id}")
     public String updateCategory(@PathVariable int id, Model model) {
         Optional<Category> category = this.categoryService.getCategoryById(id);
         if (category.isPresent()) {
@@ -79,20 +79,20 @@ public class AdminController {
 
     // Product Section -------------------------->
 
-    @GetMapping("/products")
+    @GetMapping("/admin/products")
     public String listProducts(Model model) {
         model.addAttribute("products", this.productService.GetAllProduct());
         return "/Admin/products";
     }
 
-    @GetMapping("/products/add")
+    @GetMapping("/admin/products/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("categories", categoryService.getAllCategory());
         return "/Admin/productsadd";
     }
 
-  @PostMapping("/products/add")
+  @PostMapping("/admin/products/add")
     public String addProduct(@ModelAttribute("productDTO") ProductDTO productDTO,
                              @RequestParam("productImage") MultipartFile file,
                              @RequestParam("imgName") String imgName) throws IOException {
@@ -126,13 +126,13 @@ public class AdminController {
     }
 
 
-    @RequestMapping("product/delete/{id}")
+    @RequestMapping("/admin/product/delete/{id}")
     public String requestMethodName(@PathVariable Long id) {
         this.productService.RemoveProductById(id);
         return "redirect:/admin/products";
     }
     
-  @GetMapping("/product/update/{id}")
+  @GetMapping("/admin/product/update/{id}")
   public String UpdateProductById(@PathVariable long id, Model model){
    
     Product product = productService.getProductById(id).get();
