@@ -82,7 +82,7 @@ public class HomeController {
      public String CustomeLogin(Model model) {
         model.addAttribute("title", "login page");
         GlobalData.cart.clear();
-        return "/Shop/login";
+        return "/login";
     }
     @GetMapping("/loginfail")
     public String FailLogin() {
