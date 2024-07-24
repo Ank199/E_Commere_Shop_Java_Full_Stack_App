@@ -78,6 +78,12 @@ public class HomeController {
         }
     }
 
+     @GetMapping("/login")
+    public String Loginpath() {
+        return "login";
+    }
+    
+
     @RequestMapping("/login")
      public String CustomeLogin(Model model) {
         model.addAttribute("title", "login page");
