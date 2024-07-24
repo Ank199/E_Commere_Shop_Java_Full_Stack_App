@@ -44,7 +44,7 @@ public class UserController {
   @GetMapping("/index")
   public String Home(Model model,Principal principal) {
     
-      return "/Shop/index";
+      return "/index";
   }
 
   @GetMapping("/shop")
