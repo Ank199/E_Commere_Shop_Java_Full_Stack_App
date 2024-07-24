@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-@RequestMapping("/user")
+
 public class UserController {
 
 
@@ -41,27 +41,27 @@ public class UserController {
 
   }
   
-  @GetMapping("/index")
+  @GetMapping("/user/index")
   public String Home(Model model,Principal principal) {
     
       return "/Shop/index";
   }
 
-  @GetMapping("/shop")
+  @GetMapping("/user/shop")
   public String Shop(Model model) {
     model.addAttribute("categories", this.categoryService.getAllCategory());
     model.addAttribute("products", productService.GetAllProduct());
      model.addAttribute("cartCount", GlobalData.cart.size());
     return "/Shop/shop";
   }
-  @GetMapping("/shop/category/{id}")
+  @GetMapping("/user/shop/category/{id}")
   public String ShopByCategory(Model model,@PathVariable int id) {
     model.addAttribute("categories", this.categoryService.getAllCategory());
     model.addAttribute("products", productService.getAllProductByCategoryId(id));
     // model.addAttribute("cartCount", GlobalData.cart.size());
     return "/Shop/shop";
   }
-  @GetMapping("/shop/viewproduct/{id}")
+  @GetMapping("/user/shop/viewproduct/{id}")
   public String ViewProductById(Model model,@PathVariable Long id) {
 
     model.addAttribute("product", productService.getProductById(id).get());
